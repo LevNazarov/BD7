@@ -88,6 +88,5 @@ int main()
 	if (option == 3) deleteFile();
 	if (option == 4) showFile();
 	if (option == 5) return 0;
-	if (option == 6) clearFile();
 	main();
 }
