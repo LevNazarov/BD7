@@ -6,6 +6,22 @@
 #include "fstream"
 using namespace std;
 int option;
+void clearFile()
+{
+	string line;
+	ifstream fileIn("Text.txt");
+	ofstream temp("Temp.txt", ios_base::app | ios_base::out);
+	while (getline(fileIn, line)) {
+		if (!line.empty()) {
+		temp << line << '\n';
+		}
+	}
+	fileIn.close();
+	temp.close();
+	remove("Text.txt");
+	rename("Temp.txt", "Text.txt");
+	remove("Temp.txt");
+}
 void readFile()
 {
 	ifstream fileIn("Text.txt");
@@ -25,7 +41,7 @@ void writeFile()
 	string line;
 	cout << "=====================\nInput new data\nForm: (Name Surname, Address, Phone)\n=====================\n";
 	getline(cin, line);
-	fileOut << endl << line << endl;
+	fileOut << line << endl;
 	cout << "Input successful!\n";
 	fileOut.close();
 }
@@ -33,6 +49,7 @@ void showFile()
 {
 	string line;
 	ifstream fileIn("Text.txt");
+	cout << "=====================\n";
 	while (getline(fileIn, line)) {
 		cout << line << endl;
 	}
@@ -59,6 +76,7 @@ void deleteFile()
 	remove("Text.txt");
 	rename("Temp.txt", "Text.txt");
 	remove("Temp.txt");
+	clearFile();
 }
 int main()
 {
@@ -70,5 +88,6 @@ int main()
 	if (option == 3) deleteFile();
 	if (option == 4) showFile();
 	if (option == 5) return 0;
+	if (option == 6) clearFile();
 	main();
 }
